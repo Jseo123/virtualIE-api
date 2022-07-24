@@ -1,15 +1,19 @@
-import { Client } from "pg";
+const mysql = require('mysql');
+require('dotenv').config()
 
-const client = new Client(process.env.DATABASE_URL);
+const mysqlConnection = mysql.createConnection({
+    host: process.env.HOST,
+    user: process.env.USER,
+    databse: process.env.DATABASE,
+})
 
-(async () => {
-  await client.connect();
-  try {
-    const results = await client.query("SELECT NOW()");
-    console.log(results);
-  } catch (err) {
-    console.error("error executing query:", err);
-  } finally {
-    client.end();
-  }
-})();
+mysqlConnection.connect(function (err) {
+    if(err) {
+        console.log(err);
+        return;
+    } else {
+        console.log('Db is connected')
+    }
+})
+
+export {mysqlConnection}
