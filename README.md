@@ -46,6 +46,17 @@ Middelwares: Here we store the middlewares which are functions to be executed ev
 
 Routes: Here is where we code the endpoints of the api.
 
+                Src files.
+
+app.js: This is were we set up the app.
+
+config.js: here is where we add the config properties for the server.
+
+database.js: to get the collection from the database.
+
+index.js where the server actually is.
+
+
 
 
 
