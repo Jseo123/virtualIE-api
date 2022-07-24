@@ -19,6 +19,8 @@ Jsonwebtoken: for authentication on the app and to protect certain urls to prote
 
 Mysql: allows for connection to sql.
 
+pg: handles connections to the online database for development. 
+
 Morgan: Allows us to see the request on the console which are coming to our server.
 
 Helmet: adds safety rules so that the server doesn't give away too much information to callers.
