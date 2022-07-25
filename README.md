@@ -56,7 +56,26 @@ database.js: to get the collection from the database.
 
 index.js where the server actually is.
 
+                Enviroment variables:
 
+SQL_HOST
+SQL_USER
+SQL_PASSWORD
+SQL_DATABASE
+
+This variables are your local database information. You are gonna need them in order to do the conenction to the SQL database locally. If the information you have filled here is correct, you should be able to make the dummy route work.
+
+                App flow:
+
+The application entry port is the index.js file. This file handles the port where the server is listening. 
+
+On the app file you are gonna have the routes the server is listening to. Those routes are imported from their respective files on the routes folder. 
+
+On the routes folder you will have a file for every category of routes. User, games, news, etc. Here we are gonna define the rotue names and call both the middlewares and the functions from the controller to feed data to the server.
+
+On the controller function we are gonna write the functions that execute the SQL querys (Mongo queries will be added on the future to deal with the chat information). Here we are gonna need to import the connection to the database in order to perform the queries.
+
+Databse.js handles the connection to the database and exports it to feed the controllers. You don't need to touch this file.
 
 
 

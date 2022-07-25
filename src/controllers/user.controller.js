@@ -11,12 +11,10 @@ try {
     "SELECT * FROM  user"
  )
  res.json(result).status(200);
-} catch(error) {s
+} catch(error) {
     res.status(500)
     res.send(error.message)
 }
-
-
 }
 
 export {dummyUsers}
