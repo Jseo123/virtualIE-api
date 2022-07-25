@@ -1,10 +1,11 @@
-import { mysqlConnection } from '../database'
+
+import { getConenction } from "../database";
 
 //example of a get request
 const dummyUsers  = async (req, res) => {
 try {
- const connection = mysqlConnection
- const result = connection.query(
+ const connection = await getConenction();
+ const result     = await connection.query(
     "SELECT * FROM  user"
  )
  res.json(result);
