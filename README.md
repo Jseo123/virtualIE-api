@@ -17,7 +17,7 @@ Dotenv : Allows us to create enviroment variables.
 
 Jsonwebtoken: for authentication on the app and to protect certain urls to protect from malicius authors from calling our api.
 
-Mysql: allows for connection to sql.
+promise-mysql: allows for connection to sql using promises.
 
 Morgan: Allows us to see the request on the console which are coming to our server.
 
@@ -76,6 +76,11 @@ On the routes folder you will have a file for every category of routes. User, ga
 On the controller function we are gonna write the functions that execute the SQL querys (Mongo queries will be added on the future to deal with the chat information). Here we are gonna need to import the connection to the database in order to perform the queries.
 
 Databse.js handles the connection to the database and exports it to feed the controllers. You don't need to touch this file.
+
+
+                Security:
+
+We are going to be using Jason web tokens to communicate between the back and the front as a middleware to make the data transfers more secure and to protect from malicious actors from injecting code that might breach the database as well as extra internal security headers handled by middlewares on the back. Another module called node-mysql is gonna be used to help protect against sql injections. bcryptjs is gonna be used to protect the encryption of passwords. No one in our team will know any of the passwords stored. Enviroment variables are protected and internal server information won't be displayed but on top of that we are using helmet module so that the server displays as little information about itself as possible. 
 
 
 
