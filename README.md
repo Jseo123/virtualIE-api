@@ -58,10 +58,10 @@ index.js where the server actually is.
 
                 Enviroment variables:
 
-SQL_HOST
-SQL_USER
-SQL_PASSWORD
-SQL_DATABASE
+SQL_HOST, 
+SQL_USER, 
+SQL_PASSWORD, 
+SQL_DATABASE, 
 
 This variables are your local database information. You are gonna need them in order to do the conenction to the SQL database locally. If the information you have filled here is correct, you should be able to make the dummy route work.
 
