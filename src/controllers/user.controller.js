@@ -2,7 +2,7 @@
 import { getConenction } from "../database";
 
 //example of a get request
-const dummyUsers  = async (req, res) => {
+const dummyUsers     = async (req, res) => {
 try {
     const connection = await getConenction();
  // all you need to do is to write the query on the next line
