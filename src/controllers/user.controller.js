@@ -1,6 +1,5 @@
 import { getConenction } from '../database';
 import Joi from 'joi';
-
 const dbTable = 'User';
 
 //example of a get request
@@ -24,6 +23,11 @@ const getUser = async (req, res) => {
     const dbQuery = `SELECT * FROM ${dbTable} WHERE id = ?`;
     const queryValues = [parseInt(req.params.userId)];
     const result = await connection.query(dbQuery, queryValues);
+
+    if (!result[0]) {
+      res.json({ error: 'user does not exist!' }).status(204);
+      return;
+    }
     res.json(result).status(200);
   } catch (error) {
     res.status(500);
@@ -56,6 +60,16 @@ const addUser = async (req, res) => {
     const { username, password, email } = value;
     const queryValues = [username, password, email];
 
+    const existingEmail = await connection.query(
+      `SELECT * FROM ${dbTable} WHERE email = ?`,
+      email
+    );
+
+    if (existingEmail[0]) {
+      res.json({ error: 'email already exists' }).status(409);
+      return;
+    }
+
     const dbQuery = `INSERT INTO ${dbTable}  
     (username, password, email)
     VALUES(?, ?, ?)
@@ -75,7 +89,12 @@ const deleteUser = async (req, res) => {
     const dbQuery = `DELETE FROM ${dbTable} WHERE id = ?`;
     const queryValues = [parseInt(req.params.userId)];
     const result = await connection.query(dbQuery, queryValues);
-    res.json(result).status(200);
+    if (result.affectedRows == 0) {
+      res.json({ error: 'user does not exist!' }).status(204);
+      return;
+    } else {
+      res.json({ result: 'record deleted successfully!' }).status(200);
+    }
   } catch (error) {
     res.status(500);
     res.send(error.message);
