@@ -1,4 +1,6 @@
 import { getConenction } from '../database';
+import Joi from 'joi';
+
 const dbTable = 'User';
 
 //example of a get request
@@ -31,9 +33,27 @@ const getUser = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
+    const schema = Joi.object({
+      username: Joi.string().min(2).max(30).required(),
+      email: Joi.string()
+        .email({
+          minDomainSegments: 2,
+          tlds: { allow: ['com', 'net'] },
+        })
+        .required(),
+      password: Joi.string().min(3).max(30).required(),
+    });
+
+    const { error, value } = schema.validate(req.body);
+    if (error) {
+      res.status(400);
+      res.json({ error: error.details[0].message });
+      return;
+    }
+
     const connection = await getConenction();
 
-    const { username, password, email } = req.body;
+    const { username, password, email } = value;
     const queryValues = [username, password, email];
 
     const dbQuery = `INSERT INTO ${dbTable}  
@@ -45,7 +65,7 @@ const addUser = async (req, res) => {
     res.json(result).status(200);
   } catch (error) {
     res.status(500);
-    res.json({ error: error.message });
+    res.send(error.message);
   }
 };
 
@@ -58,7 +78,7 @@ const deleteUser = async (req, res) => {
     res.json(result).status(200);
   } catch (error) {
     res.status(500);
-    res.json({ error: error.message });
+    res.send(error.message);
   }
 };
 
