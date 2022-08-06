@@ -39,6 +39,8 @@ and make it available under req.body property. In other words, it simplifies the
 
 joi: it is a popular module for data validation. This module validates the data based on schemas.
 
+async: The `async` library provides a number of utility functions for managing asynchronous operations. That is very different than the `async` keyword in the language that allows you to use `await` with promises.
+
 -D: Makes sure you install everything as a development module.
 
                 Folders

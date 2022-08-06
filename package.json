@@ -6,6 +6,7 @@
   "scripts": {
     "build": "babel src --out-dir build",
     "dev": "nodemon src/index.js --exec babel-node",
+    "migrate": "babel-node sql/migrate.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build/index.js"
   },
@@ -38,6 +39,7 @@
     "@babel/core": "^7.18.9",
     "@babel/node": "^7.18.9",
     "@babel/preset-env": "^7.18.9",
+    "async": "^3.2.4",
     "nodemon": "^2.0.19"
   }
 }
